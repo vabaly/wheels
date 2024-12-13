@@ -14,3 +14,5 @@ Function.prototype.call = function call(context, ...args) {
   delete context[fn];
   return result;
 }
+
+// apply 仅仅是参数不同，就不实现了
