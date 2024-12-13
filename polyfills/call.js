@@ -7,8 +7,10 @@
 Function.prototype.call = function call(context, ...args) {
   // 4. 如果没有传入 context，则默认使用 window
   context = context || window;
-  context.fn = this;
-  const result = context.fn(...args);
-  delete context.fn;
+  // 5. 属性名不能覆盖用户写的属性，使用 Symbol 保证唯一性
+  const fn = Symbol('fn');
+  context[fn] = this;
+  const result = context[fn](...args);
+  delete context[fn];
   return result;
 }
