@@ -244,6 +244,8 @@ function useState(initial) {
   }
 
   const actions = oldHook ? oldHook.queue : []
+  // setState 会把 action 加入到 fiber 节点的 hooks.queue 中，
+  // 组件下次渲染的时候执行
   actions.forEach(action => {
     hook.state = action(hook.state)
   })
